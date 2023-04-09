@@ -1,77 +1,82 @@
 import re
-from listaduplamente import ListaDuplamente
-from listasimplesmente import ListaSimplesmente
+from listaduplaencad import ListaDuplaEncadeada
+from listasimplesencad import ListaSimplesEncadeada
 
 
 class main:
-    def printList(list: ListaSimplesmente):
-        if list.size == 0:
-            return False
-        list.primeiro_Node()
 
-        while list.iterator:
-            print(f'[{list.iterator.data}, {list.iterator.listaDE}]')
-            list.proxNode()
-
-    def printListData(list: ListaSimplesmente):
+    def printListListaDE(list: ListaSimplesEncadeada):
         if list.size == 0:
             return False
 
-        list.primeiro_Node()
-
-        while list.iterator:
-            print(list.iterator.data)
-            list.proxNode()
-
-    def printListListaDE(list: ListaSimplesmente):
-        if list.size == 0:
-            return False
-
-        list.primeiro_Node()
+        list.first_No()
 
         while list.iterator:
             print(list.iterator.listaDE)
-            list.proxNode()
+            list.nextNo()
 
-    def getEstradas():
 
-        estradasList = ListaSimplesmente()
-        cidadesList = ListaDuplamente()
+    def printList(list: ListaSimplesEncadeada):
+        if list.size == 0:
+            return False
+
+        list.first_No()
+
+        while list.iterator:
+            print(f'[{list.iterator.data}, {list.iterator.listaDE}]')
+            list.nextNo()
+
+
+    def printListData(list: ListaSimplesEncadeada):
+        if list.size == 0:
+            return False
+
+        list.first_No()
+
+        while list.iterator:
+            print(list.iterator.data)
+            list.nextNo()
+
+
+    def estadoRodovias(cidadeName: str, rodoviasList: ListaSimplesEncadeada):
+
+        rodovias = ListaSimplesEncadeada()
+        rodoviasList.first_No()
+
+        while rodoviasList.iterator:
+
+            for cidade in rodoviasList.iterator.listaDE:
+                if cidade == cidadeName:
+                    rodovias.addNo(rodoviasList.iterator.data, None)
+            rodoviasList.nextNo()
+    
+        return rodovias
+
+
+    def getRodovias():
+
+        rodoviasList = ListaSimplesEncadeada()
+        cidadesList = ListaDuplaEncadeada()
 
         entrada = open("entrada.txt")
-
         lines = entrada.readlines()
-        estradasList.primeiro_Node()
-        cidadesList.primeiro_Node()
+
+        rodoviasList.first_No()
+        cidadesList.first_No()
 
         for line in lines:
-            estradas = re.findall(r"[A-Z]{2}-\d{3}", line)
+            rodovia = re.findall(r"[A-Z]{2}-\d{3}", line)
+
             cidades = re.findall(r'"([^"]+)"', line)
 
             for cidade in cidades:
-                cidadesList.addNode(cidade)
+                cidadesList.addNo(cidade)
 
-            estradasList.addNode(estradas[0], cidades)
-        return estradasList
+            rodoviasList.addNo(rodovia[0], cidades)
+        return rodoviasList
 
-    def cidadeEstradas(cidadeNome: str, estradasList: ListaSimplesmente):
-
-        estradas = ListaSimplesmente
-        estradasList.primeiro_Node()
-
-        while estradasList.iterator:
-
-            for cidade in estradasList.iterator.listaDE:
-                if cidade == cidadeNome:
-                    estradas.addNode(estradasList.iterator.data, None)
-            estradasList.nextNode()
-
-        return estradas
 
     if __name__ == "__main__":
-
-        estradas = getEstradas()
-
-        resultado = cityEstradas("Joinville", estradas)
-
-        printListData(resultado)
+        rodovias = getRodovias()
+        result = estadoRodovias("Joinville", rodovias)
+        printListData(result)
