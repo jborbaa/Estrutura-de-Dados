@@ -1,11 +1,14 @@
 import re
+
 from listaduplaencad import ListaDuplaEncadeada
+
 from listasimplesencad import ListaSimplesEncadeada
+
 
 
 class main:
 
-    def printListListaDE(list: ListaSimplesEncadeada):
+    def printListaDE(list: ListaSimplesEncadeada):
         if list.size == 0:
             return False
 
@@ -16,7 +19,7 @@ class main:
             list.nextNo()
 
 
-    def printList(list: ListaSimplesEncadeada):
+    def printLista(list: ListaSimplesEncadeada):
         if list.size == 0:
             return False
 
@@ -27,7 +30,7 @@ class main:
             list.nextNo()
 
 
-    def printListData(list: ListaSimplesEncadeada):
+    def printListaData(list: ListaSimplesEncadeada):
         if list.size == 0:
             return False
 
@@ -64,6 +67,8 @@ class main:
         rodoviasList.first_No()
         cidadesList.first_No()
 
+
+
         for line in lines:
             rodovia = re.findall(r"[A-Z]{2}-\d{3}", line)
 
@@ -76,7 +81,8 @@ class main:
         return rodoviasList
 
 
+
     if __name__ == "__main__":
         rodovias = getRodovias()
-        result = estadoRodovias("Joinville", rodovias)
-        printListData(result)
+        resultado = estadoRodovias("Maravilha", rodovias)
+        printListaData(resultado)
